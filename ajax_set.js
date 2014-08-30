@@ -21,7 +21,10 @@ var AjaxSet = (function () {
    */
   AjaxSet.Endpoint = function (name, settings) {
     this.name = name;
-    this.settings = settings;
+    this.settings = settings || {};
+    if (typeof this.settings.url === 'undefined') {
+      this.settings.url = '/' + this.name;
+    }
   };
 
   // /url_base/this.name に対してajaxを発行する。
