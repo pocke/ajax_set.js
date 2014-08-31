@@ -30,8 +30,8 @@ var AjaxSet = (function () {
   // /url_base/this.name に対してajaxを発行する。
   AjaxSet.Endpoint.prototype.call = function (url_base, data) {
     var settings = $.extend(true, {}, this.settings);
-    settings.url = url_base + '/' + settings.url;
-    $.extend(settings.data, data);
+    settings.url = url_base + settings.url;
+    settings.data = data;
 
     return $.ajax(settings);
   };

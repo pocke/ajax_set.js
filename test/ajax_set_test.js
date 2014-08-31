@@ -53,10 +53,19 @@ describe('AjaxSet', function () {
 
     describe('prototype.call', function () {
       it('should call $.ajax', function () {
-        // TODO: with
-        var mock = sinon.mock(jQuery).expects('ajax').once();
+        var base = '/hoge';
         var eq = new AjaxSet.Endpoint('foo');
-        eq.call('/hoge', {});
+        var set = $.extend({}, eq.settings);
+        var data = {};
+        set.data = data;
+        set.url = base + set.url;
+
+        var mock = sinon.mock(jQuery).expects('ajax');
+        console.log(set);
+        mock.once().withArgs(sinon.match(set));
+
+
+        eq.call(base, {});
         expect(mock.verify());
       });
     });
