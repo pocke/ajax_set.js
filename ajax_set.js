@@ -71,6 +71,7 @@ var AjaxSet = (function () {
   AjaxSet.RailsBase.prototype = Object.create(AjaxSet.Base.prototype);
   AjaxSet.RailsBase.prototype.constructor = AjaxSet.RailsBase;
 
+  // XXX: memberってResourceにもあるの?
   AjaxSet.RailsBase.prototype.add_member = function (action, type, param) {
     var p = param || 'id';
     var url = '/:' + p + '/' + action;

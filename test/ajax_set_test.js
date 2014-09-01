@@ -102,7 +102,6 @@ describe('AjaxSet', function () {
 
 
   describe('RailsBase', function () {
-    // TODO: new Endpointに渡される引数についてもテストしたい。
     describe('add_member', function () {
       var action = 'foo';
       var type = 'GET';
@@ -115,9 +114,20 @@ describe('AjaxSet', function () {
         b.add_member(action, type);
         expect(b[action]).to.a('function');
       });
+
+      it('should call new AjaxSet.Endpoint', function () {
+        var b = railsbase();
+        var spy = sinon.spy(AjaxSet, 'Endpoint');
+        b.add_member(action, type);
+        var subject = spy.calledWith(action, sinon.match({type: type, url: '/:id/' + action}));
+        expect(subject).to.eq(true);
+      });
+
+      after(function () {
+        AjaxSet.Endpoint.restore();
+      });
     });
 
-    // TODO: new Endpointに渡される引数についてもテストしたい。
     describe('add_collection', function () {
       var action = 'foo';
       var type = 'GET';
@@ -129,6 +139,18 @@ describe('AjaxSet', function () {
         var b = railsbase();
         b.add_collection(action, type);
         expect(b[action]).to.a('function');
+      });
+
+      it('should call new AjaxSet.Endpoint', function () {
+        var b = railsbase();
+        var spy = sinon.spy(AjaxSet, 'Endpoint');
+        b.add_collection(action, type);
+        var subject = spy.calledWith(action, sinon.match({type: type}));
+        expect(subject).to.eq(true);
+      });
+
+      after(function () {
+        AjaxSet.Endpoint.restore();
       });
     });
   });
