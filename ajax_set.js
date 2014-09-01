@@ -38,16 +38,17 @@ var AjaxSet = (function () {
 
   // return [url, data]
   AjaxSet.Endpoint.prototype.in_url_params = function (url, data) {
+    var _data = $.extend(true, {}, data);
     var new_url = url.replace(/:(.+)\//g, function (str, p1, offset, s) {
-      if (data[p1]) {
-        var res = data[p1] + '/';
-        delete data[p1];
+      if (_data[p1]) {
+        var res = _data[p1] + '/';
+        delete _data[p1];
         return res;
       } else {
         return str;
       }
     });
-    return [new_url, data];
+    return [new_url, _data];
   };
 
 
