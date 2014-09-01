@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+  - 0.10
+before_script:
+  - npm install
+script:
+  - phantomjs node_modules/mocha-phantomjs/lib/mocha-phantomjs.coffee test/index.html
+
+notifications:
+  emails:
+    - p.ck.t22@gmail.com
+  on_cussess: change
+  on_failure: always
