@@ -61,7 +61,6 @@ describe('AjaxSet', function () {
         set.url = base + set.url;
 
         var mock = sinon.mock(jQuery).expects('ajax');
-        console.log(set);
         mock.once().withArgs(sinon.match(set));
 
 
@@ -76,5 +75,9 @@ describe('AjaxSet', function () {
 
 
 (function () {
-  mocha.run();
+  if (window.mochaPhantomJS) {
+    mochaPhantomJS.run();
+  } else {
+    mocha.run();
+  }
 })();
