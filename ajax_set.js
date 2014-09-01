@@ -10,12 +10,16 @@ var AjaxSet = (function () {
     this.__name = name;
 
     endpoints.forEach(function (ep) {
-      this[ep.name] = function (data) {
-        return ep.call(this.__name, data);
-      };
+      // XXX: もうちょっとマシな呼び出し方はないの
+      AjaxSet.Base.prototype.add_endpoint.call(this, ep);
     }, this);
   };
 
+  AjaxSet.Base.prototype.add_endpoint = function (ep) {
+    this[ep.name] = function (data) {
+      return ep.call(this.__name, data);
+    };
+  };
 
   // ----------------------------------------------------------
   /*

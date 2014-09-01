@@ -22,6 +22,17 @@ describe('AjaxSet', function () {
         expect(base[ep_name]).to.a('function');
       });
     });
+
+    describe('.add_endpoint', function () {
+      var ep_name = 'hoge';
+      var ep = new AjaxSet.Endpoint(ep_name);
+      var base = new AjaxSet.Base('foo', []);
+
+      it('should assign function', function () {
+        base.add_endpoint(ep);
+        expect(base[ep_name]).to.a('function');
+      });
+    });
   });
 
 
