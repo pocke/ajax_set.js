@@ -43,9 +43,9 @@ var AjaxSet = (function () {
   // return [url, data]
   AjaxSet.Endpoint.prototype.in_url_params = function (url, data) {
     var _data = $.extend(true, {}, data);
-    var new_url = url.replace(/:(.+)\//g, function (str, p1, offset, s) {
+    var new_url = url.replace(/:([^\/]+)/g, function (str, p1, offset, s) {
       if (_data[p1]) {
-        var res = _data[p1] + '/';
+        var res = _data[p1];
         delete _data[p1];
         return res;
       } else {
@@ -58,15 +58,26 @@ var AjaxSet = (function () {
 
 
   // Rails
+  // TODO: :id の文字列を変えられるようにする
   AjaxSet.Resource = function (name) {
-    
+    AjaxSet.Base.call(this, name, eps);
   };
   AjaxSet.Resource.prototype = Object.create(AjaxSet.Base);
   AjaxSet.Resource.prototype.constructor = AjaxSet.Resource;
 
 
   AjaxSet.Resources = function (name) {
-    
+    var eps = [
+      new AjaxSet.Endpoint('index',   {url: '/',         type: 'GET'}),
+      new AjaxSet.Endpoint('show',    {url: '/:id',      type: 'GET'}),
+      new AjaxSet.Endpoint('new',     {                  type: 'GET'}),
+      new AjaxSet.Endpoint('create',  {url: '/',         type: 'GET'}),
+      new AjaxSet.Endpoint('edit',    {url: '/:id/edit', type: 'GET'}),
+      new AjaxSet.Endpoint('update',  {url: '/:id',      type: 'PUT'}),
+      new AjaxSet.Endpoint('destroy', {url: '/:id',      type: 'DELETE'}),
+    ];
+
+    AjaxSet.Base.call(this, name, eps);
   };
   AjaxSet.Resources.prototype = Object.create(AjaxSet.Base);
   AjaxSet.Resources.prototype.constructor = AjaxSet.Resources;
