@@ -102,6 +102,7 @@ describe('AjaxSet', function () {
 
 
   describe('RailsBase', function () {
+    // TODO: new Endpointに渡される引数についてもテストしたい。
     describe('add_member', function () {
       var action = 'foo';
       var type = 'GET';
@@ -116,6 +117,7 @@ describe('AjaxSet', function () {
       });
     });
 
+    // TODO: new Endpointに渡される引数についてもテストしたい。
     describe('add_collection', function () {
       var action = 'foo';
       var type = 'GET';

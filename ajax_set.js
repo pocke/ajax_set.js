@@ -15,9 +15,9 @@ var AjaxSet = (function () {
     }, this);
   };
 
-  AjaxSet.Base.prototype.add_endpoint = function (ep) {
-    this[ep.name] = function (data) {
-      return ep.call(this.__name, data);
+  AjaxSet.Base.prototype.add_endpoint = function (endpoint) {
+    this[endpoint.name] = function (data) {
+      return endpoint.call(this.__name, data);
     };
   };
 
