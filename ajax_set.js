@@ -65,7 +65,14 @@ var AjaxSet = (function () {
 
   // Rails
   // ----------------------------------------------------------
-  // TODO: :id の文字列を変えられるようにする
+  AjaxSet.RailsBase = function (name, endpoints) {
+    AjaxSet.Base.call(this, name, endpoints);
+  };
+  AjaxSet.RailsBase.prototype = Object.create(AjaxSet.Base);
+  AjaxSet.RailsBase.prototype.constructor = AjaxSet.RailsBase;
+
+
+  // ----------------------------------------------------------
   AjaxSet.Resource = function (name) {
     var eps = [
       new AjaxSet.Endpoint('show',    {url: '/',         type: 'GET'}),
@@ -76,9 +83,9 @@ var AjaxSet = (function () {
       new AjaxSet.Endpoint('destroy', {url: '/',         type: 'DELETE'}),
     ];
 
-    AjaxSet.Base.call(this, name, eps);
+    AjaxSet.RailsBase.call(this, name, eps);
   };
-  AjaxSet.Resource.prototype = Object.create(AjaxSet.Base);
+  AjaxSet.Resource.prototype = Object.create(AjaxSet.RailsBase);
   AjaxSet.Resource.prototype.constructor = AjaxSet.Resource;
 
 
@@ -95,9 +102,9 @@ var AjaxSet = (function () {
       new AjaxSet.Endpoint('destroy', {url: '/:' + p,           type: 'DELETE'}),
     ];
 
-    AjaxSet.Base.call(this, name, eps);
+    AjaxSet.RailsBase.call(this, name, eps);
   };
-  AjaxSet.Resources.prototype = Object.create(AjaxSet.Base);
+  AjaxSet.Resources.prototype = Object.create(AjaxSet.RailsBase);
   AjaxSet.Resources.prototype.constructor = AjaxSet.Resources;
 
   return AjaxSet;
