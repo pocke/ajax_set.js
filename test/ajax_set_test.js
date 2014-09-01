@@ -51,7 +51,7 @@ describe('AjaxSet', function () {
       });
     });
 
-    describe('prototype.call', function () {
+    describe('.call', function () {
       it('should call $.ajax', function () {
         var base = '/hoge';
         var eq = new AjaxSet.Endpoint('foo');
@@ -66,6 +66,25 @@ describe('AjaxSet', function () {
 
         eq.call(base, {});
         expect(mock.verify());
+      });
+    });
+
+    describe('.in_url_params', function () {
+      context('"/users/:id/edit"', function () {
+        var eq = new AjaxSet.Endpoint('edit', {url: ':id/edit'});
+        var url = eq.settings.url;
+        var base = '/users';
+        var data = {id: 42, hoge: 'foo'};
+
+        it('should return "42/edit"', function () {
+          var new_url = eq.in_url_params(url, data)[0];
+          expect(new_url).to.equal('42/edit');
+        });
+
+        it('should return data removed id', function () {
+          var new_data = eq.in_url_params(url, data)[1];
+          expect(new_data).to.deep.eq({hoge: 'foo'});
+        });
       });
     });
   });
