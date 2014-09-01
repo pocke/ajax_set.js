@@ -6,8 +6,10 @@
   "license": "MIT",
   "devDependencies": {
     "chai": "^1.9.1",
+    "coveralls": "^2.11.1",
     "mocha": "^1.21.4",
     "mocha-phantomjs": "^3.5.0",
+    "poncho": "^0.1.1",
     "sinon": "^1.10.3"
   }
 }

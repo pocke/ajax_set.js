@@ -4,6 +4,8 @@ node_js:
 
 script:
   - phantomjs node_modules/mocha-phantomjs/lib/mocha-phantomjs.coffee test/index.html
+after_success:
+  - ./node_modules/.bin/poncho -R lcov test/index.html | ./node_modules/.bin/coveralls
 
 notifications:
   emails:
