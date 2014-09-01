@@ -32,9 +32,8 @@ Test
 -----------
 
 
-[![Build Status](https://travis-ci.org/pocke/ajax_set.svg)](https://travis-ci.org/pocke/ajax_set)
-[![Coverage Status](https://coveralls.io/repos/pocke/ajax_set/badge.png?branch=master)](https://coveralls.io/r/pocke/ajax_set?branch=master)
-
+[![Build Status](https://travis-ci.org/pocke/ajax_set.js.svg?branch=master)](https://travis-ci.org/pocke/ajax_set.js)
+[![Coverage Status](https://coveralls.io/repos/pocke/ajax_set.js/badge.png?branch=master)](https://coveralls.io/r/pocke/ajax_set.js?branch=master)
 
 
 ```sh
