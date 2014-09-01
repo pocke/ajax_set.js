@@ -60,6 +60,15 @@ var AjaxSet = (function () {
   // Rails
   // TODO: :id の文字列を変えられるようにする
   AjaxSet.Resource = function (name) {
+    var eps = [
+      new AjaxSet.Endpoint('show',    {url: '/',         type: 'GET'}),
+      new AjaxSet.Endpoint('new',     {url: '/new',      type: 'GET'}),
+      new AjaxSet.Endpoint('create',  {url: '/',         type: 'POST'}),
+      new AjaxSet.Endpoint('edit',    {url: '/edit',     type: 'GET'}),
+      new AjaxSet.Endpoint('update',  {url: '/',         type: 'PUT'}),
+      new AjaxSet.Endpoint('destroy', {url: '/',         type: 'DELETE'}),
+    ];
+
     AjaxSet.Base.call(this, name, eps);
   };
   AjaxSet.Resource.prototype = Object.create(AjaxSet.Base);
@@ -71,7 +80,7 @@ var AjaxSet = (function () {
       new AjaxSet.Endpoint('index',   {url: '/',         type: 'GET'}),
       new AjaxSet.Endpoint('show',    {url: '/:id',      type: 'GET'}),
       new AjaxSet.Endpoint('new',     {                  type: 'GET'}),
-      new AjaxSet.Endpoint('create',  {url: '/',         type: 'GET'}),
+      new AjaxSet.Endpoint('create',  {url: '/',         type: 'POST'}),
       new AjaxSet.Endpoint('edit',    {url: '/:id/edit', type: 'GET'}),
       new AjaxSet.Endpoint('update',  {url: '/:id',      type: 'PUT'}),
       new AjaxSet.Endpoint('destroy', {url: '/:id',      type: 'DELETE'}),

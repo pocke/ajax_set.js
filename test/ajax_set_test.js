@@ -90,6 +90,28 @@ describe('AjaxSet', function () {
   });
 
 
+  describe('Resource', function () {
+    var name = 'foo';
+    var res = new AjaxSet.Resource(name);
+
+    describe('.__name', function () {
+      it('should assign', function () {
+        expect(res.__name).to.eq(name);
+      });
+    });
+
+    [
+      'show', 'new', 'create', 'edit', 'update', 'destroy'
+    ].forEach(function (name) {
+      describe('.' + name, function () {
+        it('should defined', function () {
+          expect(res[name]).to.a('function');
+        });
+      });
+    });
+  });
+
+
   describe('Resources', function () {
     var name = 'foo';
     var res = new AjaxSet.Resources(name);
