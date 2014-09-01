@@ -65,7 +65,26 @@ var AjaxSet = (function () {
 
   // Rails
   // ----------------------------------------------------------
-  // TODO: :id の文字列を変えられるようにする
+  AjaxSet.RailsBase = function (name, endpoints) {
+    AjaxSet.Base.call(this, name, endpoints);
+  };
+  AjaxSet.RailsBase.prototype = Object.create(AjaxSet.Base.prototype);
+  AjaxSet.RailsBase.prototype.constructor = AjaxSet.RailsBase;
+
+  AjaxSet.RailsBase.prototype.add_member = function (action, type, param) {
+    var p = param || 'id';
+    var url = '/:' + p + '/' + action;
+    var endpoint = new AjaxSet.Endpoint(action, {type: type, url: url});
+    this.add_endpoint(endpoint);
+  };
+
+  AjaxSet.RailsBase.prototype.add_collection = function (action, type) {
+    var endpoint = new AjaxSet.Endpoint(action, {type: type});
+    this.add_endpoint(endpoint);
+  };
+
+
+  // ----------------------------------------------------------
   AjaxSet.Resource = function (name) {
     var eps = [
       new AjaxSet.Endpoint('show',    {url: '/',         type: 'GET'}),
@@ -76,9 +95,9 @@ var AjaxSet = (function () {
       new AjaxSet.Endpoint('destroy', {url: '/',         type: 'DELETE'}),
     ];
 
-    AjaxSet.Base.call(this, name, eps);
+    AjaxSet.RailsBase.call(this, name, eps);
   };
-  AjaxSet.Resource.prototype = Object.create(AjaxSet.Base);
+  AjaxSet.Resource.prototype = Object.create(AjaxSet.RailsBase.prototype);
   AjaxSet.Resource.prototype.constructor = AjaxSet.Resource;
 
 
@@ -95,9 +114,9 @@ var AjaxSet = (function () {
       new AjaxSet.Endpoint('destroy', {url: '/:' + p,           type: 'DELETE'}),
     ];
 
-    AjaxSet.Base.call(this, name, eps);
+    AjaxSet.RailsBase.call(this, name, eps);
   };
-  AjaxSet.Resources.prototype = Object.create(AjaxSet.Base);
+  AjaxSet.Resources.prototype = Object.create(AjaxSet.RailsBase.prototype);
   AjaxSet.Resources.prototype.constructor = AjaxSet.Resources;
 
   return AjaxSet;

@@ -101,6 +101,37 @@ describe('AjaxSet', function () {
   });
 
 
+  describe('RailsBase', function () {
+    describe('add_member', function () {
+      var action = 'foo';
+      var type = 'GET';
+      var railsbase = function () {
+        return new AjaxSet.RailsBase('hoge', []);
+      };
+
+      it('should add function', function () {
+        var b = railsbase();
+        b.add_member(action, type);
+        expect(b[action]).to.a('function');
+      });
+    });
+
+    describe('add_collection', function () {
+      var action = 'foo';
+      var type = 'GET';
+      var railsbase = function () {
+        return new AjaxSet.RailsBase('hoge', []);
+      };
+
+      it('should add function', function () {
+        var b = railsbase();
+        b.add_collection(action, type);
+        expect(b[action]).to.a('function');
+      });
+    });
+  });
+
+
   describe('Resource', function () {
     var name = 'foo';
     var res = new AjaxSet.Resource(name);
