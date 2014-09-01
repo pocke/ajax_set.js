@@ -2,7 +2,8 @@ var AjaxSet = (function () {
   var AjaxSet = {};
 
 
-  /*  -------------------------------------------------------------------
+  // ----------------------------------------------------------
+  /*
    * URLのベースの情報と、エンドポイントの一覧を持つ。
    */
   AjaxSet.Base = function (name, endpoints) {
@@ -16,7 +17,8 @@ var AjaxSet = (function () {
   };
 
 
-  /* -------------------------------------------------------------------
+  // ----------------------------------------------------------
+  /*
    * urlのbaseの情報は持たない。
    */
   AjaxSet.Endpoint = function (name, settings) {
@@ -58,6 +60,7 @@ var AjaxSet = (function () {
 
 
   // Rails
+  // ----------------------------------------------------------
   // TODO: :id の文字列を変えられるようにする
   AjaxSet.Resource = function (name) {
     var eps = [
@@ -75,15 +78,17 @@ var AjaxSet = (function () {
   AjaxSet.Resource.prototype.constructor = AjaxSet.Resource;
 
 
-  AjaxSet.Resources = function (name) {
+  // ----------------------------------------------------------
+  AjaxSet.Resources = function (name, param) {
+    var p = param || 'id';
     var eps = [
-      new AjaxSet.Endpoint('index',   {url: '/',         type: 'GET'}),
-      new AjaxSet.Endpoint('show',    {url: '/:id',      type: 'GET'}),
-      new AjaxSet.Endpoint('new',     {                  type: 'GET'}),
-      new AjaxSet.Endpoint('create',  {url: '/',         type: 'POST'}),
-      new AjaxSet.Endpoint('edit',    {url: '/:id/edit', type: 'GET'}),
-      new AjaxSet.Endpoint('update',  {url: '/:id',      type: 'PUT'}),
-      new AjaxSet.Endpoint('destroy', {url: '/:id',      type: 'DELETE'}),
+      new AjaxSet.Endpoint('index',   {url: '/',                type: 'GET'}),
+      new AjaxSet.Endpoint('show',    {url: '/:' + p,           type: 'GET'}),
+      new AjaxSet.Endpoint('new',     {                         type: 'GET'}),
+      new AjaxSet.Endpoint('create',  {url: '/',                type: 'POST'}),
+      new AjaxSet.Endpoint('edit',    {url: '/:' + p + '/edit', type: 'GET'}),
+      new AjaxSet.Endpoint('update',  {url: '/:' + p,           type: 'PUT'}),
+      new AjaxSet.Endpoint('destroy', {url: '/:' + p,           type: 'DELETE'}),
     ];
 
     AjaxSet.Base.call(this, name, eps);
