@@ -17,7 +17,7 @@ var AjaxSet = (function () {
 
   AjaxSet.Base.prototype.add_endpoint = function (endpoint) {
     this[endpoint.name] = function (data) {
-      return endpoint.call(this.__name, data);
+      return endpoint.call('/' + this.__name, data);
     };
   };
 
